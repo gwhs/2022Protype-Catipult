@@ -24,13 +24,12 @@ public class SpinMotor extends CommandBase {
     @Override
     public void execute() {
         motor.setSelectedSensorPosition();
-        motor.setMotorPercent(0.5);
+        motor.setMotorPercent(1);
         System.out.println("position is: " + motor.getPosition());
     }
 
     @Override
     public void end(boolean interrupted) {
-        motor.setSelectedSensorPosition();
         motor.setMotorPercent(0);
     System.out.println("Goodbye World");
     }

@@ -33,6 +33,10 @@ public class Motor extends SubsystemBase {
     motor.set(ControlMode.PercentOutput, speed);
 
   }
+  
+  public void setSelectedSensorPosition() {
+    motor.setSelectedSensorPosition(0.0);
+  }
 
   public double getPosition(){
     motor.getSelectedSensorPosition();
@@ -43,7 +47,5 @@ public class Motor extends SubsystemBase {
     return motor;
   }
 
-  public void setSelectedSensorPosition() {
-    motor.setSelectedSensorPosition(0);
-  }
+
   }

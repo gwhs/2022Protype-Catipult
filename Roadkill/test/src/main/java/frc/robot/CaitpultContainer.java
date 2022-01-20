@@ -14,7 +14,6 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 public class CaitpultContainer {
     XboxController mXbox;
     private Motor motor;
-    private final SpinMotor m_SpinMotor = new SpinMotor(motor, 0.5);
 
     public CaitpultContainer() {
         motor = new Motor(7);
@@ -26,7 +25,7 @@ public class CaitpultContainer {
     private void configureButtonBindings() {
         JoystickButton buttonA = new JoystickButton(mXbox, XboxController.Button.kA.value);
 
-        buttonA.whenPressed(new SpinMotor(motor, 0.7).withTimeout(0.1));
+        buttonA.whenPressed(new SpinMotor(motor, 1).withTimeout(1));
 
         
         //JoystickButton buttonA = new JoystickButton(xbox, XboxController.Button.kA.value);
