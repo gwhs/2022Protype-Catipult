@@ -2,8 +2,14 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
+//
+//
+//REVIEW: This creates motors, gives them speeds, and gets the position
+// to create motors, pass in id to Motor, to give the speed, pass % speed as a decimal to  setMotorPercent, get position by calling getPosition
+//
+//
 package frc.robot;
-
+import java.sql.Time;
 import frc.robot.SpinMotor;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -19,8 +25,7 @@ public class Motor extends SubsystemBase {
   /** Creates a new motor. */
   public Motor(int id) {
     motor = new TalonFX(id);
-
-
+    
   }
 
   @Override
@@ -30,10 +35,9 @@ public class Motor extends SubsystemBase {
     }
 
   public void setMotorPercent(double speed){
-    motor.set(ControlMode.PercentOutput, speed);
-
+      motor.set(ControlMode.PercentOutput, speed);
   }
-  
+
   public void setSelectedSensorPosition() {
     motor.setSelectedSensorPosition(0.0);
   }

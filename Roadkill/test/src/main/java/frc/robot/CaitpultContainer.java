@@ -2,6 +2,11 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
+
+
+// REVIEW: this code controls the motors and lets the controller control the code. 
+// in the constructor we take name the motor's id.
+
 package frc.robot;
 import frc.robot.SpinMotor;
 import edu.wpi.first.wpilibj.GenericHID;
@@ -16,7 +21,7 @@ public class CaitpultContainer {
     private Motor motor;
 
     public CaitpultContainer() {
-        motor = new Motor(7);
+        motor = new Motor(8);
         mXbox = new XboxController(0);
         configureButtonBindings();
         
@@ -25,7 +30,7 @@ public class CaitpultContainer {
     private void configureButtonBindings() {
         JoystickButton buttonA = new JoystickButton(mXbox, XboxController.Button.kA.value);
 
-        buttonA.whenPressed(new SpinMotor(motor, 1).withTimeout(1));
+        buttonA.whenPressed(new SpinMotor(motor, .06)); //.withTimeout(.35) after spinmotor
 
         
         //JoystickButton buttonA = new JoystickButton(xbox, XboxController.Button.kA.value);
