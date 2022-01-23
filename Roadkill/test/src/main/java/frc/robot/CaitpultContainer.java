@@ -30,7 +30,7 @@ public class CaitpultContainer {
     private void configureButtonBindings() {
         JoystickButton buttonA = new JoystickButton(mXbox, XboxController.Button.kA.value);
 
-        buttonA.whenPressed(new SpinMotor(motor, .06)); //.withTimeout(.35) after spinmotor
+        buttonA.whenPressed(new SpinMotor(motor, .9)); //.withTimeout(.35) after spinmotor
 
         
         //JoystickButton buttonA = new JoystickButton(xbox, XboxController.Button.kA.value);
