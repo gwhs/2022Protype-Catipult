@@ -21,11 +21,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Motor extends SubsystemBase {
   private TalonFX motor;
-
   /** Creates a new motor. */
   public Motor(int id) {
     motor = new TalonFX(id);
-    
   }
 
   @Override
@@ -43,7 +41,6 @@ public class Motor extends SubsystemBase {
   }
 
   public double getPosition(){
-    motor.getSelectedSensorPosition();
     return motor.getSelectedSensorPosition();
   }
 

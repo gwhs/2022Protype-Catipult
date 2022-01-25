@@ -19,45 +19,54 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class SpinMotor extends CommandBase {
     private Motor motor;
-    private double speed; // perscent output -1 -> 1
+    private double speed; // percent output -1 -> 1
+    private double offset;
+    private boolean ran;
 
     public SpinMotor(Motor moto, double speed) {
         this.motor = moto;
         this.speed = speed;
+        
     }
 
     @Override
     public void initialize() {
-
+        offset = motor.getPosition();
         motor.setSelectedSensorPosition();
+        ran = false;
+        System.out.println("Round 1 pos:"+motor.getPosition());
+        System.out.println("Round 2 pos: "+motor.getPosition());
         motor.setMotorPercent(speed);
+        
     }
 
 
     @Override
     public void execute() {
-        System.out.println(motor.getPosition());
+
         double position = motor.getPosition();
-        if (position > 240){
+        if (position > 11000 - offset){
             //put motor in reverse
             motor.setMotorPercent(-0.06);
-        } 
-        SmartDashboard.putNumber("Spinner Pos", motor.getPosition());
+            ran = true;
+        }
+        System.out.println("check position" + motor.getPosition());
+      //  SmartDashboard.putNumber("Spinner Pos", motor.getPosition());
 
     }
 
     @Override
     public void end(boolean interrupted) {
-        motor.setSelectedSensorPosition();
         motor.setMotorPercent(0);
         System.out.println("Goodbye World");
-
     }
 
 
     @Override
     public boolean isFinished() {
-        if (motor.getPosition() < 0){
+        
+        
+        if (motor.getPosition() < 0 && ran){
             return true;
         }
         return false;
