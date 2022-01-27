@@ -32,18 +32,22 @@ public class Motor extends SubsystemBase {
 
     }
 
+  // set the speed, speed is from -1 to 1 as decimal
   public void setMotorPercent(double speed){
       motor.set(ControlMode.PercentOutput, speed);
   }
-
+  
+  // sets motor position to 0 wherever it is
   public void setSelectedSensorPosition() {
     motor.setSelectedSensorPosition(0.0);
   }
 
+  // gets the current position of the motor
   public double getPosition(){
     return motor.getSelectedSensorPosition();
   }
 
+  
   public TalonFX getMotor(){
     return motor;
   }

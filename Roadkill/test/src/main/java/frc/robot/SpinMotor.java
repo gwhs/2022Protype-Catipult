@@ -47,14 +47,14 @@ public class SpinMotor extends CommandBase {
     @Override
     // keeps going until isFinished returns true, pretty much a while loop
     public void execute() {
-        double position = motor.getPosition();
-        //position is ~11000 for 52 degrees of rotation
-        if (position > 11000 - offset){
-            //put motor in reverse to reset
-            motor.setMotorPercent(-0.06);
-            ran = true;
-        }
-        System.out.println("check position" + motor.getPosition());
+        // double position = motor.getPosition();
+        // //position is 77.3k for 360 degrees of rotation
+        // if (position > 11350 - offset){
+        //     //put motor in reverse to reset
+        //     motor.setMotorPercent(-0.06);
+        //     ran = true;
+        // }
+        // System.out.println("check position" + motor.getPosition());
       //  SmartDashboard.putNumber("Spinner Pos", motor.getPosition());
 
     }
@@ -71,9 +71,9 @@ public class SpinMotor extends CommandBase {
     @Override
     public boolean isFinished() {
         // makes sure arm is at bottom and has shot before ending.
-        if (motor.getPosition() < 0 && ran){
-            return true;
-        }
+        // if (motor.getPosition() < 0 && ran){
+        //     return true;
+        // }
         return false;
     }
 }
