@@ -23,6 +23,8 @@ public class SpinMotor extends CommandBase {
     private double offset; // motor keeps moving after end, so we get an offset to make sure the motor returns to the same position each time
     private boolean ran; // ensures the motor shoots, otherwise, it will not run after one shot, needed for isFinished
 
+    private long start;
+    private long end;
     //used for creating the motor and setting the speed
     public SpinMotor(Motor moto, double speed) {
         this.motor = moto;
@@ -36,6 +38,7 @@ public class SpinMotor extends CommandBase {
         offset = motor.getPosition();
         //resets position to 0
         motor.setSelectedSensorPosition();
+        start = System.currentTimeMillis();
         ran = false;
         System.out.println("Round 1 pos:"+motor.getPosition());
         System.out.println("Round 2 pos: "+motor.getPosition());
@@ -47,14 +50,18 @@ public class SpinMotor extends CommandBase {
     @Override
     // keeps going until isFinished returns true, pretty much a while loop
     public void execute() {
-        // double position = motor.getPosition();
-        // //position is 77.3k for 360 degrees of rotation
-        // if (position > 11350 - offset){
-        //     //put motor in reverse to reset
-        //     motor.setMotorPercent(-0.06);
-        //     ran = true;
-        // }
-        // System.out.println("check position" + motor.getPosition());
+        long elapsedTime = System.currentTimeMillis() - start;
+        double position = motor.getPosition();
+        //position is 77.3k for 360 degrees of rotation
+        if (elapsedTime >100){
+            motor.brakeMode();
+            motor.setMotorPercent(0);
+            
+            //put motor in reverse to reset
+            ran = true;
+        }
+        System.out.println("Elapsed time: " + elapsedTime);
+        System.out.println("check position " + motor.getPosition());
       //  SmartDashboard.putNumber("Spinner Pos", motor.getPosition());
 
     }
@@ -62,7 +69,9 @@ public class SpinMotor extends CommandBase {
     @Override
     // executed when isfinished returns true (below)
     public void end(boolean interrupted) {
-        //stops motor
+        //stops 
+        end = System.currentTimeMillis();
+        System.out.println("End time: " + (end - start));
         motor.setMotorPercent(0);
         System.out.println("Goodbye World");
     }
@@ -71,9 +80,9 @@ public class SpinMotor extends CommandBase {
     @Override
     public boolean isFinished() {
         // makes sure arm is at bottom and has shot before ending.
-        // if (motor.getPosition() < 0 && ran){
-        //     return true;
-        // }
+        if (motor.getPosition() < 0 - offset&& ran){
+            return true;
+        }
         return false;
     }
 }
