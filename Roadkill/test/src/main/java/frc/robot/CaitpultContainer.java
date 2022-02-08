@@ -21,7 +21,7 @@ public class CaitpultContainer {
     private Motor motor;
 
     public CaitpultContainer() {
-        motor = new Motor(1);
+        motor = new Motor(6);
         mXbox = new XboxController(0);
         configureButtonBindings();
         
@@ -30,7 +30,7 @@ public class CaitpultContainer {
     private void configureButtonBindings() {
         JoystickButton buttonA = new JoystickButton(mXbox, XboxController.Button.kA.value);
         //shoots
-        buttonA.whenPressed(new SpinMotor(motor, .86)); //.withTimeout(.35) after spinmotor
+        buttonA.whenPressed(new SpinMotor(motor, 60.0)); //.withTimeout(.35) after spinmotor
 
     }
 
